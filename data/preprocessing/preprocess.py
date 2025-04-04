@@ -44,6 +44,9 @@ def clean_text(text: str) -> str:
     # Replace hyphens within words with spaces (e.g., new-age -> new age)
     text = re.sub(r'([a-zA-Z])\-([a-zA-Z])', r'\1 \2', text)
 
+    # Remove special characters
+    text = re.sub(r'[_`\"\-;%()|+&=*%.,!?:#$@[\]/]', '', text)
+
     return text
 
 
@@ -68,8 +71,8 @@ def expand_contractions(text):
     # Create a list of possible replacements for each word (allowing for double contractions)
     expanded_options = [contractions.get(word.lower(), [word]) for word in words]
 
-    # Generate all possible sentence combinations
-    candidate_sentences = [re.sub(r'[_"`\'\-;%()|+&=*%.,!?:#$@[\]/]', '', " ".join(sentence)) for sentence in product(*expanded_options)]
+    # Generate all possible sentence combinations, removing apostrophes
+    candidate_sentences = [re.sub(r'[\']', '', " ".join(sentence)) for sentence in product(*expanded_options)]
 
     return candidate_sentences
 
