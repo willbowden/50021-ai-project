@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Tweet Uppercaser (Auto)",
+  "version": "2.1",
+  "description": "Automatically finds the top tweet, sends it to a local API for uppercasing, and logs the result.",
+  "permissions": [
+    "scripting"
+
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:5000/",
+    "*://*.twitter.com/*",
+    "*://*.x.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.twitter.com/*",
+        "*://*.x.com/*"
+      ],
+      "js": [ "content.js" ],
+      "run_at": "document_idle"
+    }
+  ]
+}
