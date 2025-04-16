@@ -1,2 +1,5 @@
 .env
 HSData
+training/data/final_preprocessed_data_yidong_devansh.csv
+training/models
+__pycache__
