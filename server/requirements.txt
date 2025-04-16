@@ -1,0 +1,8 @@
+emoji==2.14.1
+Flask==3.1.0
+flask_cors==5.0.1
+gensim==4.3.3
+nltk==3.9.1
+pandas==1.5.3
+torch==2.6.0
+transformers==4.51.3
