@@ -15,10 +15,7 @@ def get_accuracy_from_logits(logits, labels):
     return (predictions == labels).float().mean()
 
 class Classifier:
-    def __init__(self, for_training, args):
-        if for_training:
-            args.model_name_or_path = "bert-base-uncased"
-        
+    def __init__(self, for_training, args):    
         self.config = AutoConfig.from_pretrained(args.model_name_or_path)
 
         self.model = Model.from_pretrained(args.model_name_or_path)
