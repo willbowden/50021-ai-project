@@ -16,8 +16,6 @@ if __name__ == "__main__":
         print(f"Model classified text as: 0: Normal")
     elif (result == 1):
         print(f"Model classified text as: 1: Offensive")
-    elif (result == 2):
-        print(f"Model classified text as: 2: Hateful")
 
         
 
