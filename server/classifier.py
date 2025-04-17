@@ -1,4 +1,4 @@
-from model import Model
+from model import BertForSentimentClassification, AlbertForSentimentClassification, DistilBertForSentimentClassification
 
 from tqdm import tqdm
 import torch.nn as nn
@@ -17,10 +17,30 @@ def get_accuracy_from_logits(logits, labels):
     return (predictions == labels).float().mean()
 
 class Classifier:
-    def __init__(self, for_training, args):    
+    def __init__(self, for_training, args):
+        # Default to BERT    
+        if args.model_name_or_path is None:
+            if will_train:
+                args.model_name_or_path = "bert-base-uncased"
+
+        # Set up configuration.
         self.config = AutoConfig.from_pretrained(args.model_name_or_path)
 
-        self.model = Model.from_pretrained(args.model_name_or_path)
+        # Create the model with the given configuration.
+        if self.config.model_type == "bert":
+            self.model = BertForSentimentClassification.from_pretrained(
+                args.model_name_or_path
+            )
+        elif self.config.model_type == "albert":
+            self.model = AlbertForSentimentClassification.from_pretrained(
+                args.model_name_or_path
+            )
+        elif self.config.model_type == "distilbert":
+            self.model = DistilBertForSentimentClassification.from_pretrained(
+                args.model_name_or_path
+            )
+        else:
+            raise ValueError("This transformer model is not supported yet.")
 
         # Set up device as GPU if available, otherwise CPU.
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -113,17 +133,17 @@ class Classifier:
 
             attention_mask = (input_ids != 0).long()
 
-            logit = self.model(
+            logits = self.model(
                 input_ids=input_ids, attention_mask=attention_mask
             )
             
-            positive_probability = torch.sigmoid(logit.unsqueeze(-1)).item()
+            positive_probability = torch.sigmoid(logits.unsqueeze(-1)).item()
             
             positive_percentage = positive_probability * 100
-            
+
             is_positive = positive_probability > 0.5
             
             if is_positive:
-                return "Positive", int(positive_percentage)
+                return 0
             else:
-                return "Negative", int(100 - positive_percentage)
+                return 1

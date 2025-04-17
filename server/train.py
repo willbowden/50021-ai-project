@@ -52,8 +52,8 @@ if __name__ == "__main__":
         )
         # Save classifier if validation accuracy imporoved.
         if val_accuracy > best_accuracy:
-            best_accuracy = val_accuracy
             print(
                 f"Best validation accuracy improved from {best_accuracy} to {val_accuracy}, saving classifier..."
             )
+            best_accuracy = val_accuracy
             classifier.save()
