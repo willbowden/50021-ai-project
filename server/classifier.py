@@ -60,7 +60,7 @@ class Classifier:
 
                 batch_accuracy_summation += get_accuracy_from_logits(logits, labels)
 
-                loss += criterion(logits.squeeze(-1), labels.float().item()).item()
+                loss += criterion(logits.squeeze(-1), labels.float()).item()
 
                 num_batches += 1
         # Calculate accuracy.
@@ -86,7 +86,7 @@ class Classifier:
 
             logits = self.model(input_ids=input_ids, attention_mask=attention_mask)
 
-            loss = criterion(input=logits.squeeze(-1), target=labels.float().item())
+            loss = criterion(input=logits.squeeze(-1), target=labels.float())
 
             loss.backward()
 

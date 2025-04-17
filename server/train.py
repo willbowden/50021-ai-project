@@ -12,7 +12,7 @@ if __name__ == "__main__":
     classifier = Classifier(for_training=True, args=args)
 
     # Set citerion, which takes as input logits of positive class and computes binary cross-entropy.
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.BCEWithLogitsLoss()
 
     # Set optimizer to Adam.
     optimizer = optim.Adam(params=classifier.model.parameters(), lr=args.lr)
