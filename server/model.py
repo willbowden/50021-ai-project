@@ -17,8 +17,8 @@ class Model(BertPreTrainedModel):
         # Initialise a BERT model
         self.bert = BertModel(config)
         
-        # Setup CLS layer for 3-class classification
-        self.cls_layer = nn.Linear(config.hidden_size, 3)
+        # Setup CLS layer for binary classification
+        self.cls_layer = nn.Linear(config.hidden_size, 1)
 
     def forward(self, input_ids, attention_mask):
         # Feed input to BERT and obtain outputs.

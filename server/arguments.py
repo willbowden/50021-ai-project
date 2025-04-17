@@ -37,5 +37,11 @@ parser.add_argument(
     default=None,
     help="""Name of or path to the pretrained/trained model.""",
 )
+parser.add_argument(
+    "--text",
+    type=str,
+    default=None,
+    help="Text to provide to classifier when running classify.py"
+)
 
 args = parser.parse_args()

@@ -1,6 +1,10 @@
 import random # Import the random module
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from preprocessor import Preprocessor
+
+# 0. Setup text preprocessor
+preprocessor = Preprocessor()
 
 # 1. Create an instance of the Flask class
 app = Flask(__name__)

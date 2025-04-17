@@ -60,7 +60,7 @@ class Classifier:
 
                 batch_accuracy_summation += get_accuracy_from_logits(logits, labels)
 
-                loss += criterion(logits.squeeze(-1), labels).item()
+                loss += criterion(logits.squeeze(-1), labels.float().item()).item()
 
                 num_batches += 1
         # Calculate accuracy.
@@ -86,7 +86,7 @@ class Classifier:
 
             logits = self.model(input_ids=input_ids, attention_mask=attention_mask)
 
-            loss = criterion(input=logits.squeeze(-1), target=labels)
+            loss = criterion(input=logits.squeeze(-1), target=labels.float().item())
 
             loss.backward()
 
@@ -114,11 +114,17 @@ class Classifier:
 
             attention_mask = (input_ids != 0).long()
 
-            logits = self.model(
+            logit = self.model(
                 input_ids=input_ids, attention_mask=attention_mask
             )
-
-            # Get predicted class
-            predictions = torch.argmax(logits, dim=1)
             
-            return predictions
+            positive_probability = torch.sigmoid(logit.unsqueeze(-1)).item()
+            
+            positive_percentage = positive_probability * 100
+            
+            is_positive = positive_probability > 0.5
+            
+            if is_positive:
+                return "Positive", int(positive_percentage)
+            else:
+                return "Negative", int(100 - positive_percentage)
