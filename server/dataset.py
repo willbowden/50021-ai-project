@@ -32,5 +32,7 @@ class ModyDataset(Dataset):
         # Obtain attention mask i.e. a tensor containing 1s for no padded tokens and 0s for padded ones.
         attention_mask = (input_ids != 0).long()
 
+        label = torch.tensor(float(label))
+
         # Return input IDs, attention mask, and label.
         return input_ids, attention_mask, label
