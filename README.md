@@ -58,6 +58,14 @@ Fine-tuning normal BERT on our data for 3 epochs with a learning rate of `2e-5` 
 | 2     | 0.902708888053894   | 676.6227482389659 | *    |
 | 3     | 0.9002257585525513  | 819.9385483749211 |      |
 
+### `albert-base-v2`
+
+| Epoch | Validation Accuracy | Validation Loss   | Best |
+| ----- | ------------------- | ----------------- | ---- |
+| 1     | 0.883808434009552   | 695.2815099170013 |      |
+| 2     | 0.8934910297393799  | 705.5993305556476 | *    |
+| 3     | 0.8923844695091248  | 720.7617895975709 |      |
+
 ### `distilbert-base-uncased`
 
 | Epoch | Validation Accuracy | Validation Loss   | Best |
@@ -65,9 +73,3 @@ Fine-tuning normal BERT on our data for 3 epochs with a learning rate of `2e-5` 
 | 1     | 0.8978509902954102  | 667.3938904441893 |      |
 | 2     | 0.9011375308036804  | 678.4093779828399 | *    |
 | 3     | 0.8980391025543213  | 762.1903921728954 |      |
-
-### `albert-base-v2`
-
-| Epoch | Validation Accuracy | Validation Loss   | Best |
-| ----- | ------------------- | ----------------- | ---- |
-| 1 
