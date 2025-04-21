@@ -1,10 +1,14 @@
 import random # Import the random module
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from arguments import args
+from classifier import Classifier
 from preprocessor import Preprocessor
 
-# 0. Setup text preprocessor
 preprocessor = Preprocessor()
+
+args.model_name_or_path = "./models/3_epochs_distilbert"
+classifier = Classifier(for_training=False, args=args)
 
 # 1. Create an instance of the Flask class
 app = Flask(__name__)
@@ -16,7 +20,7 @@ CORS(app)
 @app.route('/process_tweet', methods=['POST'])
 def process_tweet():
     """
-    Receives tweet text via POST request, generates a random decision (0 or 1),
+    Receives tweet text via POST request, classifies the text,
     and returns the decision along with the original text.
     """
     print("Received request on /process_tweet")
@@ -34,14 +38,17 @@ def process_tweet():
 
     original_text = data['tweet_text']
 
+    preprocessed_text = preprocessor.preprocess_sample(original_text)
+
     # Generate a random decision (0 or 1)
-    random_decision = random.randint(0, 1)
-    print(f"Generated decision: {random_decision} for text: {original_text[:50]}...")
+    result = classifier.classify_sentiment(preprocessed_text)
+    
+    print(f"Generated decision: {result} for text: {original_text[:50]}...")
 
     # Return the decision and original text in a JSON response
     return jsonify({
         "original_text": original_text, # Send original text back for context
-        "decision": random_decision    # Send the random decision
+        "decision": result    # Send the decision
     })
 
 # Keep the root route for basic testing

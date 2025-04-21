@@ -23,6 +23,8 @@ class Classifier:
             if will_train:
                 args.model_name_or_path = "bert-base-uncased"
 
+        print(f"Loading model {args.model_name_or_path}")
+
         # Set up configuration.
         self.config = AutoConfig.from_pretrained(args.model_name_or_path)
 
@@ -137,13 +139,13 @@ class Classifier:
                 input_ids=input_ids, attention_mask=attention_mask
             )
             
-            positive_probability = torch.sigmoid(logits.unsqueeze(-1)).item()
+            offensive_probability = torch.sigmoid(logits.unsqueeze(-1)).item()
             
-            positive_percentage = positive_probability * 100
+            offensive_probability = offensive_probability * 100
 
-            is_positive = positive_probability > 0.5
+            is_offensive = offensive_probability > 0.5
             
-            if is_positive:
-                return 0
-            else:
+            if is_offensive:
                 return 1
+            else:
+                return 0

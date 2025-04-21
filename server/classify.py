@@ -10,6 +10,8 @@ if __name__ == "__main__":
 
     preprocessed_text = prep.preprocess_sample(args.text)
 
+    print(f"Classifying: {preprocessed_text}")
+
     result = classifier.classify_sentiment(preprocessed_text)
 
     if (result == 0):
