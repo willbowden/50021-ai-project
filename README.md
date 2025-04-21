@@ -1,5 +1,12 @@
 # 50.021 Artificial Intelligence - Group Project
 
+## Description
+
+This project is a text sentiment classification model, using fine trained BERT-based models. It is intended to be used to flag tweets as offensive, and can be used either directly with the Python code, or via the Chrome extension under the `client` folder. 
+
+Thanks to Github file size limits, our locally-trained model and the training dataset cannot be included in this repository. You can find the dataset [here](https://data.mendeley.com/datasets/9sxpkmm8xn/1)
+and use it to train your own model by saving it as `./server/data/final_preprocessed_data_yidong_devansh.csv`.
+
 ## Getting Started
 
 ### Running a Server
