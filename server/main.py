@@ -7,7 +7,6 @@ from preprocessor import Preprocessor
 
 preprocessor = Preprocessor()
 
-args.model_name_or_path = "./models/3_epochs_distilbert"
 classifier = Classifier(for_training=False, args=args)
 
 # 1. Create an instance of the Flask class
