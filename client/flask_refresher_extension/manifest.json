@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Tweet Uppercaser (Auto)",
+  "name": "Tweet Classifier (Auto)",
   "version": "2.1",
-  "description": "Automatically finds the top tweet, sends it to a local API for uppercasing, and logs the result.",
+  "description": "Automatically finds the top tweet, sends it to a local API for sentiment analysis, and highlights offensive tweets.",
   "permissions": [
     "scripting"
 

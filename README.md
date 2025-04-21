@@ -45,3 +45,13 @@ If you wish to re-evaluate a model, run the following command from the `server` 
 ```bash
 python evaluate.py --model_name_or_path <MODEL>"
 ```
+
+## Our Results
+
+### `bert-base-uncased`
+
+Fine-tuning normal BERT on our data for 3 epochs with a learning rate of `2e-5` gave these results:
+
+| Epoch | Validation Accuracy | Validation Loss   |
+| ----- | ------------------- | ----------------- |
+| 1     | 0.9006838798522949  | 654.5871332064271 |
