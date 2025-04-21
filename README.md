@@ -52,6 +52,22 @@ python evaluate.py --model_name_or_path <MODEL>"
 
 Fine-tuning normal BERT on our data for 3 epochs with a learning rate of `2e-5` gave these results:
 
-| Epoch | Validation Accuracy | Validation Loss   |
-| ----- | ------------------- | ----------------- |
-| 1     | 0.9006838798522949  | 654.5871332064271 |
+| Epoch | Validation Accuracy | Validation Loss   | Best |
+| ----- | ------------------- | ----------------- | ---- |
+| 1     | 0.9006838798522949  | 654.5871332064271 |      |
+| 2     | 0.902708888053894   | 676.6227482389659 | *    |
+| 3     | 0.9002257585525513  | 819.9385483749211 |      |
+
+### `distilbert-base-uncased`
+
+| Epoch | Validation Accuracy | Validation Loss   | Best |
+| ----- | ------------------- | ----------------- | ---- |
+| 1     | 0.8978509902954102  | 667.3938904441893 |      |
+| 2     | 0.9011375308036804  | 678.4093779828399 | *    |
+| 3     | 0.8980391025543213  | 762.1903921728954 |      |
+
+### `albert-base-v2`
+
+| Epoch | Validation Accuracy | Validation Loss   | Best |
+| ----- | ------------------- | ----------------- | ---- |
+| 1 
