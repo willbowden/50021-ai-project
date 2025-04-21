@@ -4,6 +4,8 @@ flask_cors==5.0.1
 gensim==4.3.3
 nltk==3.9.1
 pandas==2.2.3
+scikit_learn==1.2.1
 torch==2.6.0
 tqdm==4.66.1
+tqdm==4.67.1
 transformers==4.51.3
