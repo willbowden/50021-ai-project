@@ -2,6 +2,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from tqdm import trange
+from sklearn.model_selection import train_test_split
 
 from dataset import ModyDataset
 from arguments import args
@@ -17,14 +18,15 @@ if __name__ == "__main__":
     # Set optimizer to Adam.
     optimizer = optim.Adam(params=classifier.model.parameters(), lr=args.lr)
 
-    # Initialize training set and loader.
-    train_set = ModyDataset(
-        maxlen=args.maxlen_train,
-        tokenizer=classifier.tokenizer,
-    )
-    val_set = ModyDataset(
-        maxlen=args.maxlen_val, tokenizer=classifier.tokenizer
-    )
+    # Load entire dataframe once
+    full_df = pd.read_csv("./data/final_preprocessed_data_yidong_devansh.csv", names=["sentence", "label"])
+
+    # Split into 80% train, 20% validation
+    train_df, val_df = train_test_split(full_df, test_size=0.2, random_state=42, stratify=full_df["label"])
+
+    # Create datasets using the split dataframes
+    train_set = ModyDataset(maxlen=args.maxlen_train, tokenizer=classifier.tokenizer, dataframe=train_df)
+    val_set = ModyDataset(maxlen=args.maxlen_val, tokenizer=classifier.tokenizer, dataframe=val_df)
 
     # Initialize validation set and loader.
     train_loader = DataLoader(

@@ -3,11 +3,16 @@ import torch
 from torch.utils.data import Dataset
 
 class ModyDataset(Dataset):
-    def __init__(self, maxlen, tokenizer):
-        self.df = pd.read_csv("./data/final_preprocessed_data_yidong_devansh.csv", names=["sentence", "label"])
+    def __init__(self, maxlen, tokenizer, dataframe=None):
+        if dataframe is not None:
+            self.df = dataframe.reset_index(drop=True)
+        else:
+            self.df = pd.read_csv(
+                "./data/final_preprocessed_data_yidong_devansh.csv", 
+                names=["sentence", "label"]
+            )
         
         self.tokenizer = tokenizer
-        # Maximum length of tokens list to keep all the sequences of fixed size.
         self.maxlen = maxlen
 
     def __len__(self):
